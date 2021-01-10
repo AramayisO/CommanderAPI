@@ -14,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Serialization;
 
 namespace CommanderAPI
 {
@@ -35,7 +36,9 @@ namespace CommanderAPI
             };
 
             services.AddDbContext<CommandContext>(opt => opt.UseSqlServer(sqlConnectionStringBuilder.ToString()));
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(s => {
+                s.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            });
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddScoped<ICommandRepository, SqlCommandRepository>();
         }
