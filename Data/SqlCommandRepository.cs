@@ -40,6 +40,16 @@ namespace CommanderAPI.Data
             // Do nothing
         }
 
+        public void DeleteCommand(Command command)
+        {
+            if (command == null)
+            {
+                throw new ArgumentNullException(nameof(command));
+            }
+
+            _commandContext.Commands.Remove(command);
+        }
+
         public bool SaveChanges()
         {
             return (_commandContext.SaveChanges() >= 0);
