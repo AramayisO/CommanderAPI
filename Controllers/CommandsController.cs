@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using CommanderAPI.Dtos;
 
 namespace CommanderAPI.Controllers
 {
@@ -13,26 +15,34 @@ namespace CommanderAPI.Controllers
     public class CommandsController : ControllerBase
     {
         private readonly ICommandRepository _commandRepository;
+        private readonly IMapper _commandMapper;
 
-        public CommandsController(ICommandRepository commandRepository)
+        public CommandsController(ICommandRepository commandRepository, IMapper commandMapper)
         {
             _commandRepository = commandRepository;
+            _commandMapper = commandMapper;
         }
 
         // GET api/commands
         [HttpGet]
-        public ActionResult<IEnumerable<Command >> GetAllCommands()
+        public ActionResult<IEnumerable<CommandReadDto>> GetAllCommands()
         {
             var commands = _commandRepository.GetAllCommands();
-            return Ok(commands);
+            return Ok(_commandMapper.Map<IEnumerable<CommandReadDto>>(commands));
         }
 
         // /GET api/commands/{id}
         [HttpGet("{id}")]
-        public ActionResult<Command> GetCommandById(int id)
+        public ActionResult<CommandReadDto> GetCommandById(int id)
         {
             var command = _commandRepository.GetCommandById(id);
-            return Ok(command);
+
+            if (command != null)
+            {
+                return Ok(_commandMapper.Map<CommandReadDto>(command));
+            }
+
+            return NotFound();
         }
     }
 }

@@ -1,3 +1,4 @@
+using AutoMapper;
 using CommanderAPI.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -35,6 +36,7 @@ namespace CommanderAPI
 
             services.AddDbContext<CommandContext>(opt => opt.UseSqlServer(sqlConnectionStringBuilder.ToString()));
             services.AddControllers();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddScoped<ICommandRepository, SqlCommandRepository>();
         }
 
