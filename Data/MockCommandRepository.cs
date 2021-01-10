@@ -30,6 +30,11 @@ namespace CommanderAPI.Data
             return new Command { Id = 0, HowTo = "List contents of the current direcotry", Line = "dir", Platform = "Windows" };
         }
 
+        public void UpdateCommand(Command command)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool SaveChanges()
         {
             throw new NotImplementedException();

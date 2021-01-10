@@ -14,6 +14,8 @@ namespace CommanderAPI.Data
 
         Command GetCommandById(int id);
 
+        void UpdateCommand(Command command);
+
         bool SaveChanges();
     }
 }

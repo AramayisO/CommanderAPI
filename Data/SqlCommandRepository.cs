@@ -35,6 +35,11 @@ namespace CommanderAPI.Data
             return _commandContext.Commands.FirstOrDefault(p => p.Id == id);
         }
 
+        public void UpdateCommand(Command command)
+        {
+            // Do nothing
+        }
+
         public bool SaveChanges()
         {
             return (_commandContext.SaveChanges() >= 0);
