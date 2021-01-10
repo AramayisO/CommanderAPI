@@ -8,7 +8,12 @@ namespace CommanderAPI.Data
 {
     public interface ICommandRepository
     {
+        void CreateCommand(Command command);
+     
         IEnumerable<Command> GetAllCommands();
+
         Command GetCommandById(int id);
+
+        bool SaveChanges();
     }
 }

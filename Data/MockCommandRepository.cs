@@ -8,6 +8,11 @@ namespace CommanderAPI.Data
 {
     public class MockCommandRepository : ICommandRepository
     {
+        public void CreateCommand(Command command)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Command> GetAllCommands()
         {
             var commands = new List<Command>
@@ -23,6 +28,11 @@ namespace CommanderAPI.Data
         public Command GetCommandById(int id)
         {
             return new Command { Id = 0, HowTo = "List contents of the current direcotry", Line = "dir", Platform = "Windows" };
+        }
+
+        public bool SaveChanges()
+        {
+            throw new NotImplementedException();
         }
     }
 }
