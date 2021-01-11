@@ -16,11 +16,13 @@ namespace CommanderAPI.Controllers
     public class CommandsController : ControllerBase
     {
         private readonly ICommandRepository _commandRepository;
+        private readonly IPlatformRepository _platformRepository;
         private readonly IMapper _commandMapper;
 
-        public CommandsController(ICommandRepository commandRepository, IMapper commandMapper)
+        public CommandsController(ICommandRepository commandRepository, IPlatformRepository platformRepository, IMapper commandMapper)
         {
             _commandRepository = commandRepository;
+            _platformRepository = platformRepository;
             _commandMapper = commandMapper;
         }
 
@@ -52,6 +54,8 @@ namespace CommanderAPI.Controllers
         public ActionResult<CommandReadDto> CreateCommand(CommandCreateDto commandCreateDto)
         {
             var commandModel = _commandMapper.Map<Command>(commandCreateDto);
+            commandModel.Platform = _platformRepository.GetPlatformById(commandModel.PlatformId);
+
             _commandRepository.CreateCommand(commandModel);
             
             if (_commandRepository.SaveChanges())

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CommanderAPI.Migrations
 {
     [DbContext(typeof(CommanderContext))]
-    partial class CommandContextModelSnapshot : ModelSnapshot
+    partial class CommanderContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -35,12 +35,12 @@ namespace CommanderAPI.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<string>("Platform")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                    b.Property<int>("PlatformId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PlatformId");
 
                     b.ToTable("Commands");
                 });
@@ -60,6 +60,22 @@ namespace CommanderAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Platforms");
+                });
+
+            modelBuilder.Entity("CommanderAPI.Models.Command", b =>
+                {
+                    b.HasOne("CommanderAPI.Models.Platform", "Platform")
+                        .WithMany("Commands")
+                        .HasForeignKey("PlatformId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Platform");
+                });
+
+            modelBuilder.Entity("CommanderAPI.Models.Platform", b =>
+                {
+                    b.Navigation("Commands");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,4 +1,5 @@
 ﻿using CommanderAPI.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,12 +28,12 @@ namespace CommanderAPI.Data
 
         public IEnumerable<Command> GetAllCommands()
         {
-            return _commandContext.Commands.ToList();
+            return _commandContext.Commands.Include(c => c.Platform).ToList();
         }
 
         public Command GetCommandById(int id)
         {
-            return _commandContext.Commands.FirstOrDefault(p => p.Id == id);
+            return _commandContext.Commands.Include(c => c.Platform).FirstOrDefault(p => p.Id == id);
         }
 
         public void UpdateCommand(Command command)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -16,8 +17,8 @@ namespace CommanderAPI.Dtos
         [MaxLength(255)]
         public string Line { get; set; }
 
+        [ForeignKey("Platform")]
         [Required]
-        [MaxLength(255)]
-        public string Platform { get; set; }
+        public int PlatformId { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommanderAPI.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,6 +14,6 @@ namespace CommanderAPI.Dtos
 
         public string Line { get; set; }
 
-        public string Platform { get; set; }
+        public PlatformReadDto Platform { get; set; }
     }
 }

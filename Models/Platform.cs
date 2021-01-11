@@ -15,5 +15,7 @@ namespace CommanderAPI.Models
         [Required]
         [MaxLength(255)]
         public string Name { get; set; }
+
+        public IList<Command> Commands { get; set; }
     }
 }
