@@ -30,12 +30,13 @@ namespace CommanderAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var sqlConnectionStringBuilder = new SqlConnectionStringBuilder(Configuration.GetConnectionString("CommanderConnection"))
-            {
-                Password = Configuration["DbPassword"]
-            };
+            //var connectionString = Configuration.GetConnectionString("CommanderConnection");
+            //var sqlConnectionStringBuilder = new SqlConnectionStringBuilder(Configuration.GetConnectionString("CommanderConnection"))
+            //{
+            //    Password = Configuration["DbPassword"]
+            //};
 
-            services.AddDbContext<CommanderContext>(opt => opt.UseSqlServer(sqlConnectionStringBuilder.ToString()));
+            services.AddDbContext<CommanderContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("CommanderConnection")));
             services.AddControllers().AddNewtonsoftJson(s => {
                 s.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             });
