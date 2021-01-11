@@ -20,6 +20,8 @@ namespace CommanderAPI
 {
     public class Startup
     {
+        readonly string AllowedOrigins = "_AllowedOrigins";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -30,6 +32,15 @@ namespace CommanderAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: AllowedOrigins,
+                    builder =>
+                    {
+                        builder.WithOrigins("*");
+                    });
+            });
+
             //var connectionString = Configuration.GetConnectionString("CommanderConnection");
             //var sqlConnectionStringBuilder = new SqlConnectionStringBuilder(Configuration.GetConnectionString("CommanderConnection"))
             //{
