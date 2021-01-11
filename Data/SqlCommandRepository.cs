@@ -8,9 +8,9 @@ namespace CommanderAPI.Data
 {
     public class SqlCommandRepository : ICommandRepository
     {
-        private readonly CommandContext _commandContext;
+        private readonly CommanderContext _commandContext;
 
-        public SqlCommandRepository(CommandContext commandContext)
+        public SqlCommandRepository(CommanderContext commandContext)
         {
             _commandContext = commandContext;
         }

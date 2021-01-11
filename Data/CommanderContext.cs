@@ -7,14 +7,15 @@ using System.Threading.Tasks;
 
 namespace CommanderAPI.Data
 {
-    public class CommandContext : DbContext
+    public class CommanderContext : DbContext
     {
-        public CommandContext(DbContextOptions<CommandContext> opt) : base(opt)
+        public CommanderContext(DbContextOptions<CommanderContext> opt) : base(opt)
         {
 
         }
 
         public DbSet<Command> Commands { get; set; }
 
+        public DbSet<Platform> Platforms { get; set; }
     }
 }

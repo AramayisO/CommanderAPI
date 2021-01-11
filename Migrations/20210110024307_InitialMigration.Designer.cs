@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CommanderAPI.Migrations
 {
-    [DbContext(typeof(CommandContext))]
+    [DbContext(typeof(CommanderContext))]
     [Migration("20210110024307_InitialMigration")]
     partial class InitialMigration
     {

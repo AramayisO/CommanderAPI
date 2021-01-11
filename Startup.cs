@@ -35,12 +35,13 @@ namespace CommanderAPI
                 Password = Configuration["DbPassword"]
             };
 
-            services.AddDbContext<CommandContext>(opt => opt.UseSqlServer(sqlConnectionStringBuilder.ToString()));
+            services.AddDbContext<CommanderContext>(opt => opt.UseSqlServer(sqlConnectionStringBuilder.ToString()));
             services.AddControllers().AddNewtonsoftJson(s => {
                 s.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             });
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddScoped<ICommandRepository, SqlCommandRepository>();
+            services.AddScoped<IPlatformRepository, SqlPlatformRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
